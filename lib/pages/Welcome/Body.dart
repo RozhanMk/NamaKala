@@ -9,8 +9,26 @@ class Body extends StatelessWidget {
     return Background(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-           
+        children: <Widget>[
+            SizedBox(
+              height: 400,
+            ),
+            Container(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    " ورود",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                  primary: Color.fromRGBO(110, 10, 138,1),
+                  padding: EdgeInsets.symmetric(horizontal: 120, vertical: 20),
+                )
+              )
+            )
+          )
         ],
       ),
       size: size,
