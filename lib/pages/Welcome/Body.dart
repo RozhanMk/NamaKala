@@ -1,5 +1,7 @@
+import 'package:example/pages/Signup/signupScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:example/pages/Login/loginScreen.dart';
+
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,16 @@ class Body extends StatelessWidget {
                 color: Color.fromRGBO(110, 10, 138, 1),
                 text: "ورود",
                 textColor: Colors.white,
-                press : () {Navigator.push(
-                context , MaterialPageRoute(builder: (context)
-                {return loginScreen();},),);},
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return loginScreen();
+                      },
+                    ),
+                  );
+                },
               ),
             ),
             SizedBox(
@@ -31,7 +40,16 @@ class Body extends StatelessWidget {
                 color: Color.fromARGB(255, 212, 196, 218),
                 text: "ثبت نام",
                 textColor: Colors.black,
-                press : () {},
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return signupScreen();
+                      },
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -51,7 +69,8 @@ class RoundedButton extends StatelessWidget {
       {Key? key,
       required this.color,
       required this.text,
-      required this.textColor, required this.press})
+      required this.textColor,
+      required this.press})
       : super(key: key);
 
   @override

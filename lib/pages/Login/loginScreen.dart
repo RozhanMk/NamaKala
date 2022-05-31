@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Welcome/Body.dart';
-
+import 'package:example/pages/Signup/signupScreen.dart';
 class loginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -119,7 +119,9 @@ class loginScreen extends StatelessWidget {
               children:<Widget>[
                 
                 GestureDetector(
-                  onTap: (){},
+                  onTap: (){Navigator.push(
+                context , MaterialPageRoute(builder: (context)
+                {return signupScreen();},),);},
                   child: Text(
                     "ثبت نام",
                     style: TextStyle(
