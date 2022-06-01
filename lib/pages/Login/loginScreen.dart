@@ -1,3 +1,4 @@
+import 'package:example/pages/Home/homeScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,7 @@ class loginScreen extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: "A Mitra 05",
-                    fontSize: 30,
+                    fontSize: 20,
                   ),
                 ),
               ],
@@ -108,7 +109,9 @@ class loginScreen extends StatelessWidget {
                 color: Color.fromRGBO(110, 10, 138, 1),
                 text: "ورود",
                 textColor: Colors.white,
-                press : (){},
+                press : (){Navigator.push(
+                context , MaterialPageRoute(builder: (context)
+                {return homeScreen();},),);},
               ),
             ),
             SizedBox(

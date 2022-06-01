@@ -84,7 +84,7 @@ class RoundedButton extends StatelessWidget {
               style: TextStyle(
                   color: this.textColor,
                   fontFamily: "A Mitra 05",
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold),
             ),
             style: ElevatedButton.styleFrom(

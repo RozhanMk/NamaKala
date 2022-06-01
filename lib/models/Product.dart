@@ -1,10 +1,12 @@
+import 'package:example/models/group.dart';
 import 'package:flutter/material.dart';
 
 class Product {
-  int price, size, id;
+  int size, id;
+  double rating, price;
   Color color;
   String image, title, description, seller;
-  String folder, file;
+  Group group;
   Product({
     required this.price,
     required this.size,
@@ -14,8 +16,8 @@ class Product {
     required this.title,
     required this.description,
     required this.seller,
-    required this.folder,
-    required this.file,
+    required this.rating,
+    required this.group,
   });
 }
 
