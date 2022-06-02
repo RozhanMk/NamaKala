@@ -75,7 +75,7 @@ class sortingScreen extends StatelessWidget {
           
                 Column(
                   children: [
-                    SizedBox(height: 300),
+                    SizedBox(height: 320),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
@@ -91,7 +91,7 @@ class sortingScreen extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    SizedBox(height: 330),
+                    SizedBox(height: 350),
                     Container(
                       height: 150,
                       child: ListView.separated(
@@ -108,7 +108,7 @@ class sortingScreen extends StatelessWidget {
           
                 Column(
                   children: [
-                    SizedBox(height: 480),
+                    SizedBox(height: 540),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
@@ -124,7 +124,7 @@ class sortingScreen extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    SizedBox(height: 520),
+                    SizedBox(height: 570),
                     Container(
                       height: 150,
                       child: ListView.separated(
@@ -141,7 +141,7 @@ class sortingScreen extends StatelessWidget {
           
                 Column(
                   children: [
-                    SizedBox(height: 680),
+                    SizedBox(height: 740),
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
@@ -157,7 +157,7 @@ class sortingScreen extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    SizedBox(height: 720),
+                    SizedBox(height: 770),
                     Container(
                       height: 150,
                       child: ListView.separated(
