@@ -1,4 +1,5 @@
 import 'package:example/pages/Home/body.dart';
+import 'package:example/pages/Profile/profileScreen.dart';
 import 'package:example/pages/Sorting/sortScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -22,14 +23,11 @@ class statefulhomeScreen extends StatefulWidget {
 class _homeScreenState extends State<statefulhomeScreen> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: profile',
-    ),
+    profileScreen(),
     Text(
       'Index 1: buy',
     ),
     sortingScreen(),
-    Body(),
   ];
 
   void _onItemTapped(int index) {
@@ -37,6 +35,7 @@ class _homeScreenState extends State<statefulhomeScreen> {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,10 +56,7 @@ class _homeScreenState extends State<statefulhomeScreen> {
             icon: Icon(Icons.sort_rounded),
             label: "دسته بندی",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "خانه",
-          ),
+          
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Color.fromRGBO(110, 10, 138, 1),

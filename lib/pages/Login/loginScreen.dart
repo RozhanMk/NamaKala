@@ -102,7 +102,7 @@ class loginScreen extends StatelessWidget {
             ),
             
               SizedBox(
-                height: 30,
+                height: 30, 
               ),
               Container(
               child: RoundedButton(
