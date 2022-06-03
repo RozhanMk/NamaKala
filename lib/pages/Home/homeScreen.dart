@@ -1,4 +1,4 @@
-import 'package:example/pages/Home/body.dart';
+import 'package:example/pages/Cart/cartScreen.dart';
 import 'package:example/pages/Profile/profileScreen.dart';
 import 'package:example/pages/Sorting/sortScreen.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +24,7 @@ class _homeScreenState extends State<statefulhomeScreen> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     profileScreen(),
-    Text(
-      'Index 1: buy',
-    ),
+    cartScreen(),
     sortingScreen(),
   ];
 

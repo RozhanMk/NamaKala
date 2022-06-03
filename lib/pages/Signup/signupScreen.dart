@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 
 import '../Welcome/Body.dart';
 
-class signupScreen extends StatelessWidget {
+class signupScreen extends StatefulWidget {
+  @override
+  _signupScreenState createState() => _signupScreenState();
+}
+
+class _signupScreenState extends State<signupScreen> {
+  bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -114,14 +120,20 @@ class signupScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),    
                   child: TextField(
-                    obscureText: true,
+                    obscureText: _isObscure,
                     style: TextStyle(fontFamily: "A Mitra 05"),
                     decoration: InputDecoration(   
                       icon: Icon(Icons.lock , color:Color.fromRGBO(110, 10, 138, 1)),
-                      suffixIcon: Icon(
-                        Icons.visibility,
-                        color: Color.fromRGBO(110, 10, 138, 1),
-                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isObscure ? Icons.visibility_off : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                    ),
                       hintText: "*رمز عبور",
                       hintStyle: TextStyle( fontFamily: "A Mitra 05"),
                       border: InputBorder.none,
