@@ -53,8 +53,8 @@ class sortingScreen extends StatelessWidget {
                           fontFamily: "A Mitra 05",
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
-                  ),  
-                ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -68,13 +68,14 @@ class sortingScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: 3,
                         separatorBuilder: (context, _) => SizedBox(width: 10),
-                        itemBuilder: (context, index) =>
-                            buildCard(groupDigital.elementAt(index) , context),
+                        itemBuilder: (context, index) => buildCard(
+                            groupDigital.elementAt(index),
+                            context,
+                            groupDigital.elementAt(index).name),
                       ),
                     ),
                   ],
                 ),
-          
                 Column(
                   children: [
                     SizedBox(height: 320),
@@ -86,8 +87,8 @@ class sortingScreen extends StatelessWidget {
                           fontFamily: "A Mitra 05",
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
-                  ),  
-                ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -101,13 +102,14 @@ class sortingScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: 3,
                         separatorBuilder: (context, _) => SizedBox(width: 10),
-                        itemBuilder: (context, index) =>
-                            buildCard(groupClothes.elementAt(index) , context),
+                        itemBuilder: (context, index) => buildCard(
+                            groupClothes.elementAt(index),
+                            context,
+                            groupClothes.elementAt(index).name),
                       ),
                     ),
                   ],
                 ),
-          
                 Column(
                   children: [
                     SizedBox(height: 540),
@@ -119,8 +121,8 @@ class sortingScreen extends StatelessWidget {
                           fontFamily: "A Mitra 05",
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
-                  ),  
-                ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -134,13 +136,14 @@ class sortingScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: 4,
                         separatorBuilder: (context, _) => SizedBox(width: 10),
-                        itemBuilder: (context, index) =>
-                            buildCard(groupBook.elementAt(index) , context),
+                        itemBuilder: (context, index) => buildCard(
+                            groupBook.elementAt(index),
+                            context,
+                            groupBook.elementAt(index).name),
                       ),
                     ),
                   ],
                 ),
-          
                 Column(
                   children: [
                     SizedBox(height: 740),
@@ -152,8 +155,8 @@ class sortingScreen extends StatelessWidget {
                           fontFamily: "A Mitra 05",
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
-                  ),  
-                ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -167,13 +170,14 @@ class sortingScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: 3,
                         separatorBuilder: (context, _) => SizedBox(width: 10),
-                        itemBuilder: (context, index) =>
-                            buildCard(groupSport.elementAt(index) , context),
+                        itemBuilder: (context, index) => buildCard(
+                            groupSport.elementAt(index),
+                            context,
+                            groupSport.elementAt(index).name),
                       ),
                     ),
                   ],
                 ),
-                
               ],
             ),
           ),
@@ -182,36 +186,40 @@ class sortingScreen extends StatelessWidget {
     );
   }
 
-  Widget buildCard(Group group, BuildContext context) => SizedBox(
-    width: 140,
-    child: Column(
-      children: [
-        Expanded(
-          child: AspectRatio(
-            aspectRatio: 1.02,
-            child: InkWell(
-              child: Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 212, 196, 218).withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Image.asset(group.image),
+  Widget buildCard(Group group, BuildContext context, String name) => SizedBox(
+        width: 140,
+        child: Column(
+          children: [
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 1.02,
+                child: InkWell(
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color:
+                            Color.fromARGB(255, 212, 196, 218).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Image.asset(group.image),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => productsScreen(title: name),
+                          ));
+                    }),
               ),
-              onTap:(){Navigator.push(
-                context , MaterialPageRoute(builder: (context)
-                {return productsScreen();},),);},
             ),
-          ),
+            Text(
+              group.name,
+              style: TextStyle(
+                fontFamily: "A Mitra 05",
+                fontSize: 12,
+              ),
+            ),
+          ],
         ),
-        Text(
-          group.name,
-          style: TextStyle(
-            fontFamily: "A Mitra 05",
-            fontSize: 12,
-          ),
-        ),
-      ],
-    ),
-  );
+      );
 }

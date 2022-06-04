@@ -216,11 +216,7 @@ Widget buttonBox(String text, IconData icon, VoidCallback? press) => InkWell(
 
           Icon(Icons.arrow_forward_ios , color:Color.fromARGB(255, 92, 82, 91)),
         ],
-
       ),
     ),
-    //focusColor: Color.fromARGB(255, 212, 196, 218).withOpacity(0.7),
-    //borderRadius:BorderRadius.circular(15),
-
   );
 
