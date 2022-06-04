@@ -1,5 +1,7 @@
 import 'package:example/const.dart';
+import 'package:example/models/Product.dart';
 import 'package:example/models/group.dart';
+import 'package:example/pages/Products/productsScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
@@ -67,7 +69,7 @@ class sortingScreen extends StatelessWidget {
                         itemCount: 3,
                         separatorBuilder: (context, _) => SizedBox(width: 10),
                         itemBuilder: (context, index) =>
-                            buildCard(groupDigital.elementAt(index)),
+                            buildCard(groupDigital.elementAt(index) , context),
                       ),
                     ),
                   ],
@@ -100,7 +102,7 @@ class sortingScreen extends StatelessWidget {
                         itemCount: 3,
                         separatorBuilder: (context, _) => SizedBox(width: 10),
                         itemBuilder: (context, index) =>
-                            buildCard(groupClothes.elementAt(index)),
+                            buildCard(groupClothes.elementAt(index) , context),
                       ),
                     ),
                   ],
@@ -133,7 +135,7 @@ class sortingScreen extends StatelessWidget {
                         itemCount: 4,
                         separatorBuilder: (context, _) => SizedBox(width: 10),
                         itemBuilder: (context, index) =>
-                            buildCard(groupBook.elementAt(index)),
+                            buildCard(groupBook.elementAt(index) , context),
                       ),
                     ),
                   ],
@@ -166,7 +168,7 @@ class sortingScreen extends StatelessWidget {
                         itemCount: 3,
                         separatorBuilder: (context, _) => SizedBox(width: 10),
                         itemBuilder: (context, index) =>
-                            buildCard(groupSport.elementAt(index)),
+                            buildCard(groupSport.elementAt(index) , context),
                       ),
                     ),
                   ],
@@ -180,7 +182,7 @@ class sortingScreen extends StatelessWidget {
     );
   }
 
-  Widget buildCard(Group group) => SizedBox(
+  Widget buildCard(Group group, BuildContext context) => SizedBox(
     width: 140,
     child: Column(
       children: [
@@ -196,7 +198,9 @@ class sortingScreen extends StatelessWidget {
                 ),
                 child: Image.asset(group.image),
               ),
-              onTap: () {},
+              onTap:(){Navigator.push(
+                context , MaterialPageRoute(builder: (context)
+                {return productsScreen();},),);},
             ),
           ),
         ),
