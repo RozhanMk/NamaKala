@@ -12,10 +12,7 @@ class cartScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () {},
-        ),
+        
         title: Column(
           children: [
             Text(
