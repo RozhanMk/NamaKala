@@ -91,6 +91,7 @@ class productsScreen extends StatelessWidget {
                 
                   
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         margin: EdgeInsets.all(8),
@@ -108,7 +109,7 @@ class productsScreen extends StatelessWidget {
                           fontFamily: "A Mitra 05",
                           fontWeight: FontWeight.bold,
                         ),
-                  ),
+                      ),
                     ],
                   ),
 
