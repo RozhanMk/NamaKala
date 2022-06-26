@@ -25,38 +25,36 @@ class productsScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: double.infinity,
-        child: Directionality(
-          textDirection: TextDirection.rtl,
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontFamily: "A Mitra 05",
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+      body: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(8),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontFamily: "A Mitra 05",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            SizedBox(height: 50),
+            Expanded(
+              child: SizedBox(
+                child: ListView.builder(
+                  itemCount: this.chooseGroup(title).length,
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: ItemBox(context,this.chooseGroup(title)[index]),
                   ),
                 ),
-                SizedBox(height: 50),
-                ItemBox(context,this.chooseGroup(title)[0]),
-                SizedBox(height: 50),
-                ItemBox(context,this.chooseGroup(title)[1]),
-                SizedBox(height: 50),
-                ItemBox(context,this.chooseGroup(title)[2]),
-                SizedBox(height: 50),
-                ItemBox(context,this.chooseGroup(title)[3]),
-
-                
-              ],
+              ),
             ),
-          ),
+            
+            
+          ],
         ),
       ),
     );

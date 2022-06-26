@@ -29,23 +29,25 @@ class favouritesScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          child: Directionality(
-            textDirection: TextDirection.rtl,
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 50),
-                  ItemBox(context, demoCarts[0].product),
-                  SizedBox(height: 50),
-                  ItemBox(context, demoCarts[1].product),
-                  SizedBox(height: 50),
-                ],
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: SizedBox(
+                  child: ListView.builder(
+                    itemCount: demoCarts.length,
+                    itemBuilder: (context, index) => Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: ItemBox(context,demoCarts[index].product),
+                    ),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
