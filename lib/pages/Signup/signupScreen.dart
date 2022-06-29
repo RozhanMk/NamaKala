@@ -244,7 +244,7 @@ class _signupScreenState extends State<signupScreen> {
     String request =
         "signup,name:$name,telephone:$call,password:$pass,store:$store,email:$email\n";
 
-    await Socket.connect("192.168.1.4", 8000).then((serverSocket) {
+    await Socket.connect("192.168.43.204", 8000).then((serverSocket) {
       serverSocket.write(request);
       serverSocket.flush();
       serverSocket.listen((response) {
@@ -254,13 +254,13 @@ class _signupScreenState extends State<signupScreen> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return homeScreen();
+                return homeScreen(phone: _callControl.text);
               },
             ),
           );
         } else {
           setState(() {
-            if(_log == ""){
+            if (_log == "") {
               _log += "دوباره تلاش کنید";
             }
           });

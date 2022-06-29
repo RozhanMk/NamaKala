@@ -4,6 +4,9 @@ import 'package:example/pages/Profile/ordersScreen.dart';
 import 'package:flutter/material.dart';
 
 class profileScreen extends StatelessWidget {
+  String phone;
+  profileScreen({Key? key, required this.phone}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -135,7 +138,7 @@ class profileScreen extends StatelessWidget {
                       child: buttonBox("علاقه مندی", Icons.thumb_up ,
                       (){Navigator.push(
                       context , MaterialPageRoute(builder: (context)
-                      {return favouritesScreen();},),);},),
+                      {return favouritesScreen(phone:phone);},),);},),
                       ),
                     
                   ],

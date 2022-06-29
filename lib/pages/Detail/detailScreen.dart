@@ -2,8 +2,10 @@ import 'package:example/models/Product.dart';
 import 'package:flutter/material.dart';
 
 class detailScreen extends StatelessWidget {
+  String phone;
   final Product product;
-  detailScreen({Key? key, required this.product}) : super(key: key);
+  detailScreen({Key? key, required this.product, required this.phone})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -26,7 +28,6 @@ class detailScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Stack(
                     children: [
-
                       Container(
                         height: size.height,
                         padding: EdgeInsets.only(
@@ -83,19 +84,20 @@ class detailScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             CartCounter(),
                                             InkWell(
-                                                onTap: () {},
+                                              onTap: () {},
                                               child: Container(
                                                 padding: EdgeInsets.all(10),
                                                 height: 40,
                                                 width: 40,
                                                 decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Color.fromARGB(255, 212, 196, 218)
-                                                ),
+                                                    shape: BoxShape.circle,
+                                                    color: Color.fromARGB(
+                                                        255, 212, 196, 218)),
                                                 child: Image.asset(
                                                   "assets/images/heart.png",
                                                 ),
@@ -105,45 +107,57 @@ class detailScreen extends StatelessWidget {
                                         ),
                                         SizedBox(height: 50),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
                                           child: Row(
                                             children: [
                                               Container(
                                                 height: 50,
                                                 width: 58,
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(20),
-                                                  color: Color.fromARGB(255, 212, 196, 218),
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color: Color.fromARGB(
+                                                      255, 212, 196, 218),
                                                 ),
                                                 child: IconButton(
-                                                  icon: Icon(Icons.shopping_bag_outlined),
-                                                  onPressed: (){},
+                                                  icon: Icon(Icons
+                                                      .shopping_bag_outlined),
+                                                  onPressed: () {},
                                                 ),
-                                                
                                               ),
                                               Expanded(
                                                 child: SizedBox(
-                                                    height:50,
-                                                    child: InkWell(
-                                                      onTap: (){},
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(15),
-                                                          color: Color.fromRGBO(110, 10, 138, 1),
-                                                        ),
-                                                        child: Text(
-                                                          "خرید",
-                                                          style: TextStyle(
-                                                            fontFamily: "A Mitra 05",
-                                                            color: Color.fromARGB(209, 235, 231, 231),
-                                                            fontWeight: FontWeight.bold,
-                                                            fontSize: 20,
-                                                          ),
-                                                          textAlign: TextAlign.center,
-                                                        ),
+                                                  height: 50,
+                                                  child: InkWell(
+                                                    onTap: () {},
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15),
+                                                        color: Color.fromRGBO(
+                                                            110, 10, 138, 1),
                                                       ),
-                                              
+                                                      child: Text(
+                                                        "خرید",
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              "A Mitra 05",
+                                                          color: Color.fromARGB(
+                                                              209,
+                                                              235,
+                                                              231,
+                                                              231),
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 20,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
                                                     ),
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -264,13 +278,14 @@ class _CartCounterState extends State<CartCounter> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        numberButton(Icons.remove, 
-        () {
-          if(numOfItems > 1){
-            setState(() {
-              numOfItems--;
-            });
-          }
+        numberButton(
+          Icons.remove,
+          () {
+            if (numOfItems > 1) {
+              setState(() {
+                numOfItems--;
+              });
+            }
           },
         ),
         Padding(

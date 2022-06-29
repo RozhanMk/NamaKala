@@ -4,29 +4,46 @@ import 'package:example/pages/Sorting/sortScreen.dart';
 import 'package:flutter/material.dart';
 
 class homeScreen extends StatelessWidget {
+  String phone;
+  String getPhone() {
+    return this.phone;
+  }
+
+  homeScreen({Key? key, required this.phone}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: statefulhomeScreen(),
+      body: statefulhomeScreen(phone: phone),
     );
   }
 }
 
 class statefulhomeScreen extends StatefulWidget {
-  const statefulhomeScreen({Key? key}) : super(key: key);
+  final String phone;
+  const statefulhomeScreen({Key? key, required this.phone}) : super(key: key);
 
   @override
   _homeScreenState createState() => _homeScreenState();
 }
 
 class _homeScreenState extends State<statefulhomeScreen> {
+  String phone ="";
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
-    profileScreen(),
-    cartScreen(),
-    sortingScreen(),
-  ];
+  List<Widget> _widgetOptions = [];
+
+
+  @override
+  void initState() {
+    _widgetOptions = <Widget>[
+      profileScreen(phone: widget.phone),
+      cartScreen(phone: widget.phone),
+      sortingScreen(phone: widget.phone),
+    ];
+    super.initState();
+  }
+
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -54,7 +71,6 @@ class _homeScreenState extends State<statefulhomeScreen> {
             icon: Icon(Icons.sort_rounded),
             label: "دسته بندی",
           ),
-          
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Color.fromRGBO(110, 10, 138, 1),

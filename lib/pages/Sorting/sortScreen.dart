@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
 class sortingScreen extends StatelessWidget {
+  String phone;
+  sortingScreen({Key? key, required this.phone}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -207,7 +210,7 @@ class sortingScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => productsScreen(title: name),
+                            builder: (context) => productsScreen(title: name, phone:phone),
                           ));
                     }),
               ),

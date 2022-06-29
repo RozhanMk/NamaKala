@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:example/pages/Home/homeScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +12,12 @@ class loginScreen extends StatefulWidget {
   @override
   _loginScreenState createState() => _loginScreenState();
 }
+
 class _loginScreenState extends State<loginScreen> {
-  bool _isObscure = true;    
+  final TextEditingController _callControl = TextEditingController(text: "");
+  final TextEditingController _passControl = TextEditingController(text: "");
+  bool _isObscure = true;
+  String _log = "";
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +26,13 @@ class _loginScreenState extends State<loginScreen> {
       body: Container(
         height: size.height,
         width: double.infinity,
-        child:Stack(
+        child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
+            
             Positioned(
-              bottom:0,
-              left:0,
+              bottom: 0,
+              left: 0,
               child: Image.asset(
                 "assets/images/loginHaze.png",
                 color: Colors.white.withOpacity(0.3),
@@ -32,11 +40,12 @@ class _loginScreenState extends State<loginScreen> {
                 //width:size.width,
               ),
             ),
+            
             Column(
               //mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  height: 180,
+                  height: 150,
                 ),
                 Text(
                   "ورود",
@@ -49,123 +58,163 @@ class _loginScreenState extends State<loginScreen> {
               ],
             ),
             Column(
-              children:<Widget>[
+              children: <Widget>[
                 SizedBox(
-                  height: 240,
+                  height: 210,
                 ),
-               Directionality(
-                textDirection: TextDirection.rtl,
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  height: size.height*0.08,
-                  width: size.width * 0.8,
-                  
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 212, 196, 218),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: TextField(
-                    style: TextStyle(fontFamily: "A Mitra 05"),
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.phone , color:Color.fromRGBO(110, 10, 138, 1)),
-                      hintText: "شماره تماس",
-                      hintStyle: TextStyle( fontFamily: "A Mitra 05"),
-                      border: InputBorder.none,
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    height: size.height * 0.08,
+                    width: size.width * 0.8,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 212, 196, 218),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: TextField(
+                      controller: _callControl,
+                      style: TextStyle(fontFamily: "A Mitra 05"),
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.phone,
+                            color: Color.fromRGBO(110, 10, 138, 1)),
+                        hintText: "شماره تماس",
+                        hintStyle: TextStyle(fontFamily: "A Mitra 05"),
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                 ),
-              ),
                 SizedBox(
                   height: 15,
                 ),
-            Directionality(
-              textDirection: TextDirection.rtl,
-              child: Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                height: size.height*0.08,
-                width: size.width * 0.8,
-                
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 212, 196, 218),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: TextField(
-                  obscureText: _isObscure,
-                  style: TextStyle(fontFamily: "A Mitra 05"),
-                  decoration: InputDecoration(   
-                    icon: Icon(Icons.lock , color:Color.fromRGBO(110, 10, 138, 1)),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _isObscure ? Icons.visibility_off : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isObscure = !_isObscure;
-                        });
-                      },
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    height: size.height * 0.08,
+                    width: size.width * 0.8,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 212, 196, 218),
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    hintText: "رمز عبور",
-                    hintStyle: TextStyle( fontFamily: "A Mitra 05"),
-                    border: InputBorder.none,
-                      
+                    child: TextField(
+                      controller: _passControl,
+                      obscureText: _isObscure,
+                      style: TextStyle(fontFamily: "A Mitra 05"),
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.lock,
+                            color: Color.fromRGBO(110, 10, 138, 1)),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isObscure
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          },
+                        ),
+                        hintText: "رمز عبور",
+                        hintStyle: TextStyle(fontFamily: "A Mitra 05"),
+                        border: InputBorder.none,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            
-              SizedBox(
-                height: 30, 
-              ),
-              Container(
-              child: RoundedButton(
-                color: Color.fromRGBO(110, 10, 138, 1),
-                text: "ورود",
-                textColor: Colors.white,
-                press : (){Navigator.push(
-                context , MaterialPageRoute(builder: (context)
-                {return homeScreen();},),);},
-              ),
-            ),
-            SizedBox(
-                height: 20,
-              ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:<Widget>[
-                
-                GestureDetector(
-                  onTap: (){Navigator.push(
-                context , MaterialPageRoute(builder: (context)
-                {return signupScreen();},),);},
-                  child: Text(
-                    "ثبت نام",
-                    style: TextStyle(
-                      color: Color.fromRGBO(110, 10, 138, 1),
-                      fontFamily: "A Mitra 05",
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    )
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 70,
+                  child: RoundedButton(
+                    color: Color.fromRGBO(110, 10, 138, 1),
+                    text: "ورود",
+                    textColor: Colors.white,
+                    press: () {
+                      send(_callControl.text, _passControl.text);
+                    },
                   ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return signupScreen();
+                            },
+                          ),
+                        );
+                      },
+                      child: Text("ثبت نام",
+                          style: TextStyle(
+                            color: Color.fromRGBO(110, 10, 138, 1),
+                            fontFamily: "A Mitra 05",
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ),
+                    Text(
+                      "ثبت نام نکرده اید؟ ",
+                      style: TextStyle(
+                        color: Color.fromRGBO(110, 10, 138, 1),
+                        fontFamily: "A Mitra 05",
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
                 ),
                 Text(
-                  "ثبت نام نکرده اید؟ ",
+                  _log,
                   style: TextStyle(
-                    color: Color.fromRGBO(110, 10, 138, 1),
                     fontFamily: "A Mitra 05",
-                    fontSize: 11,
+                    color: Colors.red,
                   ),
                 ),
               ],
             ),
-              ],
-            ),  
-          
-            
           ],
         ),
       ),
     );
+  }
+
+  send(String call, String pass) async {
+    String request = "login,telephone:$call,password:$pass\n";
+
+    await Socket.connect("192.168.43.204", 8000).then((serverSocket) {
+      serverSocket.write(request);
+      serverSocket.flush();
+      serverSocket.listen((response) {
+        String result = utf8.decode(response);
+        if (result == "valid") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return homeScreen(phone: _callControl.text);
+              },
+            ),
+          );
+        } else {
+          setState(() {
+            if (_log == "") {
+              _log += "دوباره تلاش کنید";
+            }
+          });
+        }
+      });
+    });
   }
 }

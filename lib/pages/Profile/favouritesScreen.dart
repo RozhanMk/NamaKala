@@ -4,6 +4,9 @@ import 'package:example/pages/Detail/detailScreen.dart';
 import 'package:flutter/material.dart';
 
 class favouritesScreen extends StatelessWidget {
+  String phone;
+  favouritesScreen({Key? key, required this.phone}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -77,7 +80,7 @@ class favouritesScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => detailScreen(product: item),
+                            builder: (context) => detailScreen(product: item, phone: phone),
                           ));
                     }),
                     ),
