@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:example/models/ProfilePerson.dart';
 import 'package:example/pages/Home/homeScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -241,20 +242,31 @@ class _signupScreenState extends State<signupScreen> {
 
   send(
       String name, String call, String pass, String store, String email) async {
+    if (name == "") {
+      name = "-";
+    }
+    if (store == "") {
+      store = "-";
+    }
+    if (email == "") {
+      email = "-";
+    }
     String request =
         "signup,name:$name,telephone:$call,password:$pass,store:$store,email:$email\n";
 
     await Socket.connect("192.168.43.204", 8000).then((serverSocket) {
       serverSocket.write(request);
       serverSocket.flush();
-      serverSocket.listen((response) {
+      serverSocket.listen((response) async{
         String result = utf8.decode(response);
+        print(result);
         if (result == "valid") {
+          ProfilePerson person = ProfilePerson(name, call, pass, email, store);
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
-                return homeScreen(phone: _callControl.text);
+                return homeScreen(person: person);
               },
             ),
           );

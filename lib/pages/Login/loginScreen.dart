@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:example/models/ProfilePerson.dart';
 import 'package:example/pages/Home/homeScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class loginScreen extends StatefulWidget {
 }
 
 class _loginScreenState extends State<loginScreen> {
+  ProfilePerson person = ProfilePerson("name", "p", "p", "email", "store");
   final TextEditingController _callControl = TextEditingController(text: "");
   final TextEditingController _passControl = TextEditingController(text: "");
   bool _isObscure = true;
@@ -29,7 +31,6 @@ class _loginScreenState extends State<loginScreen> {
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
-            
             Positioned(
               bottom: 0,
               left: 0,
@@ -40,7 +41,6 @@ class _loginScreenState extends State<loginScreen> {
                 //width:size.width,
               ),
             ),
-            
             Column(
               //mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -196,14 +196,15 @@ class _loginScreenState extends State<loginScreen> {
     await Socket.connect("192.168.43.204", 8000).then((serverSocket) {
       serverSocket.write(request);
       serverSocket.flush();
-      serverSocket.listen((response) {
+      serverSocket.listen((response) async {
         String result = utf8.decode(response);
         if (result == "valid") {
+          getPerson(_callControl.text);
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
-                return homeScreen(phone: _callControl.text);
+                return homeScreen(person: person);
               },
             ),
           );
@@ -214,6 +215,24 @@ class _loginScreenState extends State<loginScreen> {
             }
           });
         }
+      });
+    });
+  }
+
+  getPerson(String call) async {
+    String request = "getPersonProfile,$call\n";
+
+    await Socket.connect("192.168.43.204", 8000).then((serverSocket) {
+      serverSocket.write(request);
+      serverSocket.flush();
+      serverSocket.listen((response) async {
+        String result = utf8.decode(response);
+        person = ProfilePerson(
+            result.split(",")[0],
+            result.split(",")[1],
+            result.split(",")[2],
+            result.split(",")[3],
+            result.split(",")[4]);
       });
     });
   }

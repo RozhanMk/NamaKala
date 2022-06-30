@@ -1,12 +1,22 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:example/models/ProfilePerson.dart';
 import 'package:example/pages/Profile/favouritesScreen.dart';
 import 'package:example/pages/Profile/myProductsScreen.dart';
 import 'package:example/pages/Profile/ordersScreen.dart';
 import 'package:flutter/material.dart';
 
-class profileScreen extends StatelessWidget {
-  String phone;
-  profileScreen({Key? key, required this.phone}) : super(key: key);
+class profileScreen extends StatefulWidget {
+  ProfilePerson person;
+  profileScreen({Key? key, required this.person}) : super(key: key);
 
+  @override
+  State<profileScreen> createState() => _profileScreenState();
+}
+
+class _profileScreenState extends State<profileScreen> {
+  String name = "";
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -68,7 +78,7 @@ class profileScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
-                      child: textBox("فاطمه میرزائی کلانی", Icons.person),
+                      child: textBox(widget.person.name, Icons.person),
                     ),
                     Column(
                       children: [
@@ -89,7 +99,7 @@ class profileScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
-                      child: textBox("09354179723", Icons.phone),
+                      child: textBox(widget.person.phone, Icons.phone),
                     ),
                     Column(
                       children: [
@@ -110,37 +120,65 @@ class profileScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
-                      child: textBox("rozhan.mirzaei82@gmail.com", Icons.email),
+                      child: textBox(widget.person.email, Icons.email),
                     ),
-                    
+
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 20),
-                      child: buttonBox("سفارشات", Icons.shop,
-                      (){Navigator.push(
-                      context , MaterialPageRoute(builder: (context)
-                      {return ordersScreen();},),);},),
+                      child: buttonBox(
+                        "سفارشات",
+                        Icons.shop,
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ordersScreen();
+                              },
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                    
+
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 20),
-                      child: buttonBox("کالاهای من", Icons.store,
-                      (){Navigator.push(
-                      context , MaterialPageRoute(builder: (context)
-                      {return myProductsScreen();},),);},),
+                      child: buttonBox(
+                        "کالاهای من",
+                        Icons.store,
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return myProductsScreen();
+                              },
+                            ),
+                          );
+                        },
                       ),
-                    
-                    
+                    ),
+
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 20),
-                      child: buttonBox("علاقه مندی", Icons.thumb_up ,
-                      (){Navigator.push(
-                      context , MaterialPageRoute(builder: (context)
-                      {return favouritesScreen(phone:phone);},),);},),
+                      child: buttonBox(
+                        "علاقه مندی",
+                        Icons.thumb_up,
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return favouritesScreen(phone: widget.person.phone);
+                              },
+                            ),
+                          );
+                        },
                       ),
-                    
+                    ),
                   ],
                 ),
               ],
@@ -177,49 +215,31 @@ Widget textBox(String text, IconData icon) => Container(
     );
 
 Widget buttonBox(String text, IconData icon, VoidCallback? press) => InkWell(
-    
-    onTap: press,
-
-    child: Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: 20, vertical: 10),
-      height:70,
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 212, 196, 218).withOpacity(0.5),
-        borderRadius: BorderRadius.circular(15),
-
-      ),
-      child: Row(
-        children: [
-        
-          Icon(icon , color:Colors.black),
-
-          SizedBox(width: 20),
-
-          Expanded(
-
-            child: Text(
-
-              text,
-
-              style: TextStyle(
-
+      onTap: press,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        height: 70,
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 212, 196, 218).withOpacity(0.5),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: Colors.black),
+            SizedBox(width: 20),
+            Expanded(
+              child: Text(
+                text,
+                style: TextStyle(
                   color: Colors.black54,
-
                   fontFamily: "A Mitra 05",
-
                   fontSize: 12,
-
+                ),
               ),
-
             ),
-
-          ),
-          
-
-          Icon(Icons.arrow_forward_ios , color:Color.fromARGB(255, 92, 82, 91)),
-        ],
+            Icon(Icons.arrow_forward_ios,
+                color: Color.fromARGB(255, 92, 82, 91)),
+          ],
+        ),
       ),
-    ),
-  );
-
+    );

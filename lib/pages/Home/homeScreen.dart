@@ -3,47 +3,42 @@ import 'package:example/pages/Profile/profileScreen.dart';
 import 'package:example/pages/Sorting/sortScreen.dart';
 import 'package:flutter/material.dart';
 
-class homeScreen extends StatelessWidget {
-  String phone;
-  String getPhone() {
-    return this.phone;
-  }
+import '../../models/ProfilePerson.dart';
 
-  homeScreen({Key? key, required this.phone}) : super(key: key);
+class homeScreen extends StatelessWidget {
+  ProfilePerson person;
+
+  homeScreen({Key? key, required this.person}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: statefulhomeScreen(phone: phone),
+      body: statefulhomeScreen(person: person),
     );
   }
 }
 
 class statefulhomeScreen extends StatefulWidget {
-  final String phone;
-  const statefulhomeScreen({Key? key, required this.phone}) : super(key: key);
+  final ProfilePerson person;
+  const statefulhomeScreen({Key? key, required this.person}) : super(key: key);
 
   @override
   _homeScreenState createState() => _homeScreenState();
 }
 
 class _homeScreenState extends State<statefulhomeScreen> {
-  String phone ="";
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = [];
-
 
   @override
   void initState() {
     _widgetOptions = <Widget>[
-      profileScreen(phone: widget.phone),
-      cartScreen(phone: widget.phone),
-      sortingScreen(phone: widget.phone),
+      profileScreen(person: widget.person),
+      cartScreen(phone: widget.person.phone),
+      sortingScreen(phone: widget.person.phone),
     ];
     super.initState();
   }
-
-
 
   void _onItemTapped(int index) {
     setState(() {
