@@ -34,8 +34,8 @@ class _homeScreenState extends State<statefulhomeScreen> {
   void initState() {
     _widgetOptions = <Widget>[
       profileScreen(person: widget.person),
-      cartScreen(phone: widget.person.phone),
-      sortingScreen(phone: widget.person.phone),
+      cartScreen(person: widget.person),
+      sortingScreen(person: widget.person),
     ];
     super.initState();
   }

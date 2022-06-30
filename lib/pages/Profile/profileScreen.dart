@@ -153,7 +153,7 @@ class _profileScreenState extends State<profileScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return myProductsScreen();
+                                return myProductsScreen(person: widget.person);
                               },
                             ),
                           );
@@ -172,7 +172,7 @@ class _profileScreenState extends State<profileScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return favouritesScreen(phone: widget.person.phone);
+                                return favouritesScreen(person: widget.person);
                               },
                             ),
                           );

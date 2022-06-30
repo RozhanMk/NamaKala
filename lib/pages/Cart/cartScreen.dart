@@ -1,12 +1,13 @@
 import 'package:example/models/Cart.dart';
 import 'package:example/models/Product.dart';
+import 'package:example/models/ProfilePerson.dart';
 import 'package:example/pages/Detail/detailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:example/pages/Products/productsScreen.dart';
 
 class cartScreen extends StatefulWidget {
-  final String phone;
-  const cartScreen({Key? key, required this.phone}) : super(key: key);
+  final ProfilePerson person;
+  const cartScreen({Key? key, required this.person}) : super(key: key);
   @override
   State<cartScreen> createState() => _cartScreenState();
 }
@@ -65,7 +66,7 @@ class _cartScreenState extends State<cartScreen> {
                         });
                       },
                       child: ItemBox(context, demoCarts[index].product,
-                          demoCarts[index].numOfItems.toString(), widget.phone),
+                          demoCarts[index].numOfItems.toString(), widget.person),
                     ),
                   ),
                 ),
@@ -144,7 +145,7 @@ class _cartScreenState extends State<cartScreen> {
   }
 }
 
-Row ItemBox(BuildContext context, Product item, String numOfItems , String phone) {
+Row ItemBox(BuildContext context, Product item, String numOfItems , ProfilePerson person) {
   return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
     //SizedBox(height: 80),
     Expanded(
@@ -164,7 +165,7 @@ Row ItemBox(BuildContext context, Product item, String numOfItems , String phone
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => detailScreen(product: item , phone: phone),
+                  builder: (context) => detailScreen(product: item , person: person),
                 ));
           }),
     ),

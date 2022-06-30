@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:example/models/Product.dart';
 import 'package:example/models/ProfilePerson.dart';
 import 'package:example/pages/Home/homeScreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +20,8 @@ class _signupScreenState extends State<signupScreen> {
   final TextEditingController _passControl = TextEditingController(text: "");
   final TextEditingController _storeControl = TextEditingController(text: "");
   final TextEditingController _emailControl = TextEditingController(text: "");
+  
+  int indexOfProducts = 0;
   String _log = "";
   bool _isObscure = true;
   @override
@@ -257,11 +260,21 @@ class _signupScreenState extends State<signupScreen> {
     await Socket.connect("192.168.43.204", 8000).then((serverSocket) {
       serverSocket.write(request);
       serverSocket.flush();
-      serverSocket.listen((response) async{
+      serverSocket.listen((response) async {
         String result = utf8.decode(response);
         print(result);
         if (result == "valid") {
-          ProfilePerson person = ProfilePerson(name, call, pass, email, store);
+          ProfilePerson person;
+
+          if (indexOfProducts <= mobileProducts.length - 1) {
+            person = ProfilePerson(name, call, pass, email, store,
+                [mobileProducts[indexOfProducts]], [], []);
+          } else {
+            person = ProfilePerson(name, call, pass, email, store, [], [], []);
+          }
+            indexOfProducts += 1;
+
+          persons.add(person);
           Navigator.push(
             context,
             MaterialPageRoute(

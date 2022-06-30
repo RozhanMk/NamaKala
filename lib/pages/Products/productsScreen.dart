@@ -1,9 +1,11 @@
 import 'package:example/models/Product.dart';
 import 'package:example/pages/Detail/detailScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:example/models/ProfilePerson.dart';
+
 
 class productsScreen extends StatelessWidget {
-  String phone;
+  ProfilePerson person;
   final String title;
 
   List<Product> chooseGroup(String title) {
@@ -14,7 +16,7 @@ class productsScreen extends StatelessWidget {
     //ToDo
   }
 
-  productsScreen({Key? key, required this.title, required this.phone})
+  productsScreen({Key? key, required this.title, required this.person})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,8 @@ class productsScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => detailScreen(product: item, phone: phone),
+                    builder: (context) =>
+                        detailScreen(product: item, person: person),
                   ));
             }),
       ),

@@ -3,12 +3,13 @@ import 'package:example/models/Product.dart';
 import 'package:example/models/group.dart';
 import 'package:example/pages/Products/productsScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:example/models/ProfilePerson.dart';
 
 import 'package:flutter/material.dart';
 
 class sortingScreen extends StatelessWidget {
-  String phone;
-  sortingScreen({Key? key, required this.phone}) : super(key: key);
+  ProfilePerson person;
+  sortingScreen({Key? key, required this.person}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -210,7 +211,7 @@ class sortingScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => productsScreen(title: name, phone:phone),
+                            builder: (context) => productsScreen(title: name, person: person),
                           ));
                     }),
               ),

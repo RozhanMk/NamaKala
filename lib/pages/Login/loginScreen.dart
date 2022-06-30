@@ -15,7 +15,8 @@ class loginScreen extends StatefulWidget {
 }
 
 class _loginScreenState extends State<loginScreen> {
-  ProfilePerson person = ProfilePerson("name", "p", "p", "email", "store");
+  ProfilePerson person =
+      ProfilePerson("name", "p", "p", "email", "store", [], [], []);
   final TextEditingController _callControl = TextEditingController(text: "");
   final TextEditingController _passControl = TextEditingController(text: "");
   bool _isObscure = true;
@@ -219,21 +220,13 @@ class _loginScreenState extends State<loginScreen> {
     });
   }
 
-  getPerson(String call) async {
-    String request = "getPersonProfile,$call\n";
-
-    await Socket.connect("192.168.43.204", 8000).then((serverSocket) {
-      serverSocket.write(request);
-      serverSocket.flush();
-      serverSocket.listen((response) async {
-        String result = utf8.decode(response);
-        person = ProfilePerson(
-            result.split(",")[0],
-            result.split(",")[1],
-            result.split(",")[2],
-            result.split(",")[3],
-            result.split(",")[4]);
-      });
-    });
+  getPerson(String call) {
+    ProfilePerson p;
+    for (p in persons) {
+      if (p.phone == call) {
+        person = p;
+      }
+    }
+    
   }
 }

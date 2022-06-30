@@ -1,10 +1,12 @@
 import 'package:example/models/Product.dart';
 import 'package:flutter/material.dart';
+import 'package:example/models/ProfilePerson.dart';
+
 
 class detailScreen extends StatelessWidget {
-  String phone;
+  ProfilePerson person;
   final Product product;
-  detailScreen({Key? key, required this.product, required this.phone})
+  detailScreen({Key? key, required this.product, required this.person})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
