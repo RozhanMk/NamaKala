@@ -24,7 +24,7 @@ ProfilePerson demoSeller = ProfilePerson("name", "phone", "pass", "email","دی�
 List<Product> mobileProducts = [
   Product(
     id: 1,
-    price: "36،416،000 تومان",
+    price: "36416000",
     colors: [
       Color.fromARGB(255, 71, 192, 71),
       Color.fromARGB(255, 233, 128, 224),
@@ -39,7 +39,7 @@ List<Product> mobileProducts = [
   ),
   Product(
     id: 2,
-    price: "10،540،000 تومان",
+    price: "10540000",
     colors: [
       Color.fromARGB(255, 237, 128, 228),
       Color.fromARGB(255, 94, 101, 199),
@@ -54,7 +54,7 @@ List<Product> mobileProducts = [
   ),
   Product(
     id: 3,
-    price: " 57،000،000 تومان",
+    price: "57000000",
     colors: [
       Color.fromARGB(255, 148, 153, 224),
       Color.fromARGB(255, 203, 204, 221),
@@ -69,7 +69,7 @@ List<Product> mobileProducts = [
   ),
   Product(
     id: 4,
-    price: "34،500،000 تومان",
+    price: "34500000",
     colors: [
       Color.fromARGB(255, 45, 57, 230),
       Color.fromARGB(255, 195, 198, 241),

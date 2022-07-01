@@ -2,12 +2,19 @@ import 'package:example/models/Product.dart';
 import 'package:flutter/material.dart';
 import 'package:example/models/ProfilePerson.dart';
 
-
-class detailScreen extends StatelessWidget {
+class detailScreen extends StatefulWidget {
   ProfilePerson person;
   final Product product;
   detailScreen({Key? key, required this.product, required this.person})
       : super(key: key);
+
+  @override
+  State<detailScreen> createState() => _detailScreenState();
+}
+
+class _detailScreenState extends State<detailScreen> {
+  String _log = "";
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -65,23 +72,23 @@ class detailScreen extends StatelessWidget {
                                         ),
                                         Row(children: [
                                           dot(
-                                              product: product,
-                                              color: product.colors[0],
+                                              product: widget.product,
+                                              color: widget.product.colors[0],
                                               isSelected: true),
                                           SizedBox(width: 20),
                                           dot(
-                                              product: product,
-                                              color: product.colors[1]),
+                                              product: widget.product,
+                                              color: widget.product.colors[1]),
                                           SizedBox(width: 20),
                                           dot(
-                                              product: product,
-                                              color: product.colors[2]),
+                                              product: widget.product,
+                                              color: widget.product.colors[2]),
                                         ]),
                                         Padding(
                                           padding: EdgeInsets.symmetric(
                                               vertical: 20),
                                           child: Text(
-                                            product.description,
+                                            widget.product.description,
                                             style: TextStyle(height: 1.5),
                                           ),
                                         ),
@@ -91,7 +98,31 @@ class detailScreen extends StatelessWidget {
                                           children: [
                                             CartCounter(),
                                             InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                setState(() {
+                                                  if (!widget
+                                                      .person.sellProducts
+                                                      .contains(
+                                                          widget.product)) {
+                                                            if(widget
+                                                      .person.favourite
+                                                      .contains(
+                                                          widget.product)){
+                                                            widget.person.favourite
+                                                        .remove(widget.product);
+                                                          }else{
+                                                            widget.person.favourite
+                                                        .add(widget.product);
+                                                          }
+                                                    
+                                                  } else {
+                                                    if(_log == ""){
+                                                      _log +=
+                                                        "شما فروشنده این کالا هستید";
+                                                    }
+                                                  }
+                                                });
+                                              },
                                               child: Container(
                                                 padding: EdgeInsets.all(10),
                                                 height: 40,
@@ -125,9 +156,25 @@ class detailScreen extends StatelessWidget {
                                                 child: IconButton(
                                                   icon: Icon(Icons
                                                       .shopping_bag_outlined),
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    setState(() {
+                                                  if (!widget
+                                                      .person.sellProducts
+                                                      .contains(
+                                                          widget.product)) {
+                                                    widget.person.cartProducts
+                                                        .add(widget.product);
+                                                  } else {
+                                                    if(_log == ""){
+                                                      _log +=
+                                                        "شما فروشنده این کالا هستید";
+                                                    }
+                                                  }
+                                                });
+                                                  },
                                                 ),
                                               ),
+                                              
                                               Expanded(
                                                 child: SizedBox(
                                                   height: 50,
@@ -164,7 +211,15 @@ class detailScreen extends StatelessWidget {
                                               ),
                                             ],
                                           ),
+                                          
                                         ),
+                                        Text(
+                                                _log,
+                                                style: TextStyle(
+                                                  fontFamily: "A Mitra 05",
+                                                  color: Colors.red,
+                                                ),
+                                              ),
                                       ],
                                     ),
                                   ),
@@ -182,7 +237,7 @@ class detailScreen extends StatelessWidget {
                             Container(
                               //width:300,
                               child: Text(
-                                product.title,
+                                widget.product.title,
                                 style: TextStyle(
                                   fontFamily: "A Mitra 05",
                                   color: Colors.black54,
@@ -195,7 +250,7 @@ class detailScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  product.rating,
+                                  widget.product.rating,
                                   style: TextStyle(
                                     color: Colors.black54,
                                     fontWeight: FontWeight.bold,
@@ -209,7 +264,7 @@ class detailScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  product.price,
+                                  widget.product.price,
                                   style: TextStyle(
                                     fontFamily: "A Mitra 05",
                                     fontWeight: FontWeight.bold,
@@ -218,7 +273,7 @@ class detailScreen extends StatelessWidget {
                                 ),
                                 SizedBox(width: 20),
                                 Expanded(
-                                  child: Image.asset(product.image,
+                                  child: Image.asset(widget.product.image,
                                       fit: BoxFit.fitWidth),
                                 ),
                               ],

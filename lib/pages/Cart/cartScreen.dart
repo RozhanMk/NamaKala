@@ -41,11 +41,11 @@ class _cartScreenState extends State<cartScreen> {
             Expanded(
               child: SizedBox(
                 child: ListView.builder(
-                  itemCount: demoCarts.length,
+                  itemCount: widget.person.cartProducts.length,
                   itemBuilder: (context, index) => Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: Dismissible(
-                      key: Key(demoCarts[index].product.id.toString()),
+                      key: Key(widget.person.cartProducts[index].id.toString()),
                       direction: DismissDirection.endToStart,
                       background: Container(
                         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -62,11 +62,11 @@ class _cartScreenState extends State<cartScreen> {
                       ),
                       onDismissed: (direction) {
                         setState(() {
-                          demoCarts.removeAt(index);
+                          widget.person.cartProducts.removeAt(index);
                         });
                       },
-                      child: ItemBox(context, demoCarts[index].product,
-                          demoCarts[index].numOfItems.toString(), widget.person),
+                      child: ItemBox(context, widget.person.cartProducts[index],
+                          "1", widget.person),
                     ),
                   ),
                 ),
@@ -127,7 +127,7 @@ class _cartScreenState extends State<cartScreen> {
                     ),
                   ),
                   Text(
-                    "138,952,000 تومان",
+                    sumOfCart(widget.person)+"تومان",
                     style: TextStyle(
                       fontFamily: "A Mitra 05",
                       color: Colors.black54,

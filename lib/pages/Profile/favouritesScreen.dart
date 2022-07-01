@@ -44,10 +44,10 @@ class favouritesScreen extends StatelessWidget {
               Expanded(
                 child: SizedBox(
                   child: ListView.builder(
-                    itemCount: demoCarts.length,
+                    itemCount: person.favourite.length,
                     itemBuilder: (context, index) => Padding(
                       padding: EdgeInsets.symmetric(vertical: 10),
-                      child: ItemBox(context, demoCarts[index].product),
+                      child: ItemBox(context, person.favourite[index]),
                     ),
                   ),
                 ),
